@@ -16,51 +16,58 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="6*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Label Content="From:"
                Grid.Row="0"
                Grid.Column="0"
-               Margin="10" />
+               Margin="10,10,10,10" />
         <DatePicker x:Name="fromDatePicker"
                     Grid.Row="0"
                     Grid.Column="1"
-                    Margin="10" />
+                    Margin="10,10,10,10"
+                    Grid.ColumnSpan="2" />
         <Label Content="To:"
                Grid.Row="1"
                Grid.Column="0"
-               Margin="10" />
+               Margin="10,10,10,10" />
         <DatePicker x:Name="toDatePicker"
                     Grid.Row="1"
                     Grid.Column="1"
-                    Margin="10" />
+                    Margin="10,10,10,10"
+                    Grid.ColumnSpan="2" />
         <Label Content="フォルダ名:"
                Grid.Row="2"
                Grid.Column="0"
-               Margin="10" />
-        <TextBox x:Name="folderNameTextBox"
-                 Grid.Row="2"
-                 Grid.Column="1"
-                 Margin="10"
-                 Text="{Binding FolderName, UpdateSourceTrigger=PropertyChanged}" />
+               Margin="10,10,10,10" />
+        <Label x:Name="folderNameTextBox"
+               Grid.Row="2"
+               Grid.Column="1"
+               Margin="10,10,10,10"
+               Content="{Binding FolderName, UpdateSourceTrigger=PropertyChanged}"
+               Grid.ColumnSpan="2" />
         <Label Content="コピー先:"
                Grid.Row="3"
                Grid.Column="0"
-               Margin="10" />
+               Margin="10,10,10,10" />
         <TextBox x:Name="destinationTextBox"
                  Grid.Row="3"
                  Grid.Column="1"
-                 Margin="10" />
+                 VerticalContentAlignment="Center"
+                 Margin="10,10,10,10"
+                 Grid.ColumnSpan="2" />
         <Button Content="参照"
                 Grid.Row="4"
-                Grid.Column="1"
-                Margin="10 0 10 10"
+                Grid.Column="2"
+                Margin="0,0,0,10"
                 Width="100"
-                HorizontalAlignment="Right"
+                HorizontalAlignment="Center"
                 Click="BrowseButton_Click" />
-        <Grid Grid.Row="5" Grid.ColumnSpan="2">
-        <!--画面全体を2分割して保存ボタンとキャンセルボタンを追加-->
+        <Grid Grid.Row="5"
+              Grid.ColumnSpan="3">
+            <!--画面全体を2分割して保存ボタンとキャンセルボタンを追加-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -77,7 +84,7 @@
                     Name="CloseButton"
                     Grid.Column="1"
                     Margin="10 0 10 0"
-                    Click="CloseButton_Click"/>
+                    Click="CloseButton_Click" />
         </Grid>
     </Grid>
 </Window>

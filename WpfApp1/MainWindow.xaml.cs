@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Win32;
 
 namespace WpfApp1
 {
@@ -40,6 +39,7 @@ namespace WpfApp1
             toDatePicker.SelectedDateChanged += (s, e) => UpdateFolderName();
             UpdateFolderName();
         }
+
 
         private void UpdateFolderName()
         {
@@ -76,7 +76,6 @@ namespace WpfApp1
             DateTime fromDate = (DateTime)fromDatePicker.SelectedDate;
             DateTime toDate = (DateTime)toDatePicker.SelectedDate;
             string destinationPath = destinationTextBox.Text;
-            string folderName = folderNameTextBox.Text;
 
             if (string.IsNullOrEmpty(destinationPath))
             {
@@ -84,7 +83,7 @@ namespace WpfApp1
                 return;
             }
             // すでにフォルダが存在する場合は上書きするか選択する
-            if (Directory.Exists(Path.Combine(destinationPath, folderName)))
+            if (Directory.Exists(Path.Combine(destinationPath, FolderName)))
             {
                 MessageBoxResult result = MessageBox.Show("フォルダがすでに存在します。上書きしますか？", "確認", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.No)
@@ -92,6 +91,7 @@ namespace WpfApp1
                     return;
                 }
             }
+            Directory.CreateDirectory(destinationPath);
 
             // Directory.GetDirectoriesでYYYYMMDDのフォルダ名のみを取得する
             string[] allDirectories = Directory.GetDirectories(@"C:\Users\uts19\デスクトップ\App1\Log", "*", SearchOption.AllDirectories);
@@ -117,7 +117,7 @@ namespace WpfApp1
                 return;
             }
 
-            string targetPath = Path.Combine(destinationPath, folderName);
+            string targetPath = Path.Combine(destinationPath, FolderName);
             Directory.CreateDirectory(targetPath);
 
 
@@ -138,7 +138,7 @@ namespace WpfApp1
             foreach (string directory in Directory.GetDirectories(sourceDir))
             {
                 // フォルダ名がYYYYMMDDにパースできるか判定する
-                if  (!DateTime.TryParse(Path.GetDirectoryName(directory), out DateTime _))
+                if (!DateTime.TryParse(Path.GetDirectoryName(directory), out DateTime _))
                 {
                     continue;
                 }
